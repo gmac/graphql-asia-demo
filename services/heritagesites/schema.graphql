@@ -1,0 +1,37 @@
+enum HeritageSiteCategory {
+  CULTURAL
+  MIXED
+  NATURAL
+}
+
+type HeritageSite {
+  id: Int!
+  name: String!
+  description: String
+  startDate: Int!
+  endYear: Int
+  lat: Float!
+  lon: Float!
+  area: Float
+  category: HeritageSiteCategory!
+  countries: [Country]!
+  continents: [Continent]!
+}
+
+type Country {
+  code: ID!
+  heritageSites: [HeritageSite]
+}
+
+type Continent {
+  code: ID!
+  heritageSites: [HeritageSite]
+}
+
+type Query {
+  heritageSite(id: ID!): HeritageSite
+  heritageSites(limit: Int): [HeritageSite]!
+  _countries(codes: [ID]!): [Country]! @merge(keyField: "code")
+  _continents(codes: [ID]!): [Continent]! @merge(keyField: "code")
+  _sdl: String!
+}

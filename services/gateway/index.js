@@ -7,15 +7,15 @@ const { stitchingDirectivesTransformer } = stitchingDirectives();
 const { makeRemoteExecutor, fetchRemoteSchema } = require('./remote_utils');
 
 async function makeGatewaySchema() {
-  const heritageSitesExec = makeRemoteExecutor('http://localhost:4001/graphql');
+  const unescoExec = makeRemoteExecutor('http://localhost:4001/graphql');
   const countriesExec = makeRemoteExecutor('https://countries.trevorblades.com');
 
   return stitchSchemas({
     subschemaConfigTransforms: [stitchingDirectivesTransformer],
     subschemas: [
       {
-        schema: await fetchRemoteSchema(heritageSitesExec),
-        executor: heritageSitesExec,
+        schema: await fetchRemoteSchema(unescoExec),
+        executor: unescoExec,
         batch: true,
       },
       {

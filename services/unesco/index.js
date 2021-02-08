@@ -32,24 +32,24 @@ const schema = makeExecutableSchema({
   typeDefs,
   resolvers: {
     Query: {
-      heritageSite: (_root, { id }) => database.find(s => s.id === Number(id)) || new Error('not found'),
+      unescoSite: (_root, { id }) => database.find(s => s.id === Number(id)) || new Error('not found'),
       _countries: (_root, { codes }) => codes.map(code => ({ code })),
       _continents: (_root, { codes }) => codes.map(code => ({ code })),
       _sdl: () => typeDefs,
     },
-    HeritageSite: {
+    UnescoSite: {
       countries: (root) => root.countries.map(code => ({ code })),
       continents: (root) => root.continents.map(code => ({ code })),
     },
     Country: {
-      heritageSites: (root) => sitesByCountryIndex[root.code],
+      unescoSites: (root) => sitesByCountryIndex[root.code],
     },
     Continent: {
-      heritageSites: (root) => sitesByContinentIndex[root.code],
+      unescoSites: (root) => sitesByContinentIndex[root.code],
     },
   }
 });
 
 const app = express();
 app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
-app.listen(4001, () => console.log('heritagesites running at http://localhost:4001/graphql'));
+app.listen(4001, () => console.log('unesco running at http://localhost:4001/graphql'));

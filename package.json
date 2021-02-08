@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start-heritagesites": "node services/heritagesites/index.js",
-    "start-gateway": "node services/gateway/index.js",
+    "start-unesco": "node services/unesco/index.js",
+    "start-gateway": "wait-on tcp:4001 && node services/gateway/index.js",
     "start": "concurrently \"yarn:start-*\""
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "cross-fetch": "^3.0.6",
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
-    "graphql": "^15.4.0"
+    "graphql": "^15.4.0",
+    "wait-on": "^5.2.1"
   }
 }

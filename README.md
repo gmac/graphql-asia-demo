@@ -22,7 +22,25 @@ yarn start
 
 ## Try it!
 
-First go to the [UNESCO API](http://localhost:4001/graphql) and look at some UNESCO site data, which includes an extremely primitive version of a `Country`:
+### Countries
+
+Go to the [Countries API](https://countries.trevorblades.com) and check out some country data:
+
+```graphql
+query {
+  countries {
+    code
+    name
+    emoji
+    phone
+    capital
+  }
+}
+```
+
+### UNESCO Sites
+
+Next go to the [UNESCO API](http://localhost:4001/graphql) and look at some UNESCO site data, which includes an extremely primitive version of the `Country`:
 
 ```graphql
 query {
@@ -40,6 +58,8 @@ query {
 }
 ```
 
+### Gateway Schema
+
 Now go to the [stitched gateway](http://localhost:4000/graphql) and see the same query with data from the Countries API stitched into it:
 
 ```graphql
@@ -52,8 +72,10 @@ query {
       code
       name
       emoji
+      phone
+      capital
       unescoSites {
-        id
+        name
       }
     }
   }
